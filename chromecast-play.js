@@ -56,9 +56,9 @@ class ChromecastPlay {
 
   handleStatusChange(status) {
     if (status.playerState === 'BUFFERING') {
-      this.log('Buffering media...');
+      this.log('Buffering');
     } else if (status.playerState === 'PLAYING') {
-      this.log('Media playing.');
+      this.log('Playing');
       this.chromecastClient.close();
     }
   }

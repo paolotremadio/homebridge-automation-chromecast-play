@@ -23,6 +23,7 @@ class AutomationChromecastPlay {
     this.chromecastDeviceName = chromecastDeviceName;
     this.currentMediaName = 'none';
     this.currentMediaAuthor = 'none';
+    this.currentMediaStatus = 'none';
 
     this.loadMedia(mediaFile);
 
@@ -45,6 +46,10 @@ class AutomationChromecastPlay {
       .addCharacteristic(CustomCharacteristics.MediaAuthor)
       .on('get', callback => callback(null, this.currentMediaAuthor));
 
+    this.switchService
+      .addCharacteristic(CustomCharacteristics.MediaStatus)
+      .on('get', callback => callback(null, this.currentMediaStatus));
+
     this.accessoryInformationService = new Service.AccessoryInformation()
       .setCharacteristic(Characteristic.Name, this.name)
       .setCharacteristic(Characteristic.Manufacturer, pkginfo.author.name || pkginfo.author)
@@ -62,6 +67,10 @@ class AutomationChromecastPlay {
     this.switchService
       .getCharacteristic(CustomCharacteristics.MediaAuthor)
       .updateValue(this.currentMediaAuthor);
+
+    this.switchService
+      .getCharacteristic(CustomCharacteristics.MediaStatus)
+      .updateValue(this.currentMediaStatus);
   }
 
   getServices() {
@@ -106,10 +115,16 @@ class AutomationChromecastPlay {
     const mediaName = mediaConfig.name;
     const mediaAuthor = mediaConfig.author.name || 'unknown';
 
+    const mediaStatusUpdate = (status) => {
+      this.log(status);
+      this.currentMediaStatus = status;
+      this.refreshValues();
+    };
+
     this.log(`Playing  media "${mediaName}" by ${mediaAuthor}`);
 
     new ChromecastPlay(
-      this.log,
+      mediaStatusUpdate,
       this.chromecastDeviceName,
       mediaConfig.url,
     );
