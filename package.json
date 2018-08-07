@@ -1,7 +1,7 @@
 {
   "name": "homebridge-automation-chromecast-play",
   "version": "0.0.1",
-  "description": "Play/cast audio and video to your Chromecast",
+  "description": "Play/cast audio and/or video to your Chromecast",
   "license": "ISC",
   "keywords": [
     "homebridge-plugin"

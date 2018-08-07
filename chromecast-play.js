@@ -1,4 +1,4 @@
-const { CastClient, DefaultMediaReceiver } = require('castv2-client');
+const { Client, DefaultMediaReceiver } = require('castv2-client');
 const mdns = require('mdns');
 const mime = require('mime-types');
 const debug = require('debug')('pt-chromecast-play');
@@ -43,7 +43,7 @@ class ChromecastPlay {
   }
 
   clientConnect(host, port) {
-    this.chromecastClient = new CastClient();
+    this.chromecastClient = new Client();
 
     const connectionDetails = { host, port };
 
@@ -52,6 +52,15 @@ class ChromecastPlay {
 
       this.launchPlayer();
     });
+  }
+
+  handleStatusChange(status) {
+    if (status.playerState === 'BUFFERING') {
+      this.log('Buffering media...');
+    } else if (status.playerState === 'PLAYING') {
+      this.log('Media playing.');
+      this.chromecastClient.close();
+    }
   }
 
   launchPlayer() {
@@ -77,6 +86,7 @@ class ChromecastPlay {
 
       player.on('status', (status) => {
         debug(`Status broadcast playerState=${status.playerState}`);
+        this.handleStatusChange(status);
       });
 
       debug(`App "${player.session.displayName}" launched, loading media ${media.contentId}...`);
@@ -87,7 +97,7 @@ class ChromecastPlay {
           return;
         }
 
-        this.log(`Media playing. Player state: ${status.playerState}`);
+        this.handleStatusChange(status);
       });
     });
   }
