@@ -76,7 +76,6 @@ Note: some properties are not compatible with iOS Home app, use [Elgato Eve app]
 |-----------|----------|-------|---------|
 | name | Yes | A unique name for the accessory. It will be used as the accessory name in HomeKit. | `Living Room Play` |
 | chromecastDeviceName | Yes | The name of your Chromecast device as shown in your Google Home App (case insensitive). This plugin will use Bonjour/mdns to detect the IP address of the Chromecast based on this name. | `Living Room` |
-| light.zones | Yes | The number of zones of your lightstrip (this plugin does not currently support autodetect) | `24` |
 | mediaFile | Yes | The path of the media file (relative to the Homebridge current working directory) | `./media.json` |
 
 ## Other useful plugins
