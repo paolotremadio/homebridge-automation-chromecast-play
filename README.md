@@ -6,7 +6,7 @@ This accessory will play/cast audio and/or video to your Chromecast on demand. I
 
 The list of media (audio/video) to be played must be stored on a file. The plugin will pick a random media from the file every time you turn on the switch. If you want to apply always the same, create a json file with only one media.
 
-## Palettes file
+## Media file
 
 Example:
 
