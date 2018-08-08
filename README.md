@@ -31,12 +31,14 @@ Example:
 
 The JSON file must contain an array of objects. Each object will be a media.
 
-Format of each palette object:
+Format of each media object:
+
 | Attribute | Required | Description | Example |
 |-----------|----------|-------------|---------|
 | name | Yes | The name of the media | `Ukulele Song` |
 | url | Yes | The URL of the media to be streamed | `https://freepd.com/music/Ukulele%20Song.mp3` |
 | author.name | No (default: `unknown`) | The name of the author of the media | `Rafael Krux` |
+
 
 You can find an example file in this repo under `media.json`. This file contains some public domain audio (but you can stream video too). 
 
@@ -65,7 +67,7 @@ The switch has the following properties:
 | Name | Description | Example |
 |------|-------------|---------|
 | Author | The name of the author of the current media | `Rafael Krux` |
-| Palette |The name of the current applied media | `Ukulele Song` |
+| Media |The name of the current applied media | `Ukulele Song` |
 | Status |The current media status | `Playing` |
 
 Note: some properties are not compatible with iOS Home app, use [Elgato Eve app](https://itunes.apple.com/us/app/elgato-eve/id917695792?mt=8) instead.
