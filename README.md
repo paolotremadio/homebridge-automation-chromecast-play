@@ -1,4 +1,5 @@
 
+
 # Automation - Chromecast Play  
 
 ## Intro
@@ -86,5 +87,6 @@ Do you want to automatically turn on the speakers when you stream some audio? Or
 Check my [homebridge-automation-chromecast](https://github.com/paolotremadio/homebridge-automation-chromecast) plugin.
 
 ## TODO
-[] Support for live streams
-[] Support for setting the MIME type in the json file
+- [ ] Support for live streams
+- [ ] Support for setting the MIME type in the json file
+
