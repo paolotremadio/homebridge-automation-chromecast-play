@@ -89,8 +89,3 @@ Note: some properties are not compatible with iOS Home app, use [Elgato Eve app]
 Do you want to automatically turn on the speakers when you stream some audio? Or adjust the volume of the speakers?
 
 Check my [homebridge-automation-chromecast](https://github.com/paolotremadio/homebridge-automation-chromecast) plugin.
-
-## TODO
-- [ ] Support for live streams
-- [ ] Support for setting the MIME type in the json file
-
