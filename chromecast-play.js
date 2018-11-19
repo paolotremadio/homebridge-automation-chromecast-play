@@ -4,14 +4,16 @@ const mime = require('mime-types');
 const debug = require('debug')('pt-chromecast-play');
 
 class ChromecastPlay {
-  constructor(logger, chromecastDeviceName, fileToPlay) {
+  constructor(logger, chromecastDeviceName, fileToPlay, mimeType = null, streamType = null) {
     this.chromecastDeviceName = chromecastDeviceName;
 
     this.fileToPlay = fileToPlay;
-    this.mimeType = mime.lookup(fileToPlay);
+    this.mimeType = mimeType || mime.lookup(fileToPlay);
     if (!this.mimeType) {
       throw new Error('Mime type not supported');
     }
+
+    this.streamType = streamType.toUpperCase() || 'BUFFERED';
 
     this.log = logger;
     this.chromecastClient = null;
@@ -20,7 +22,13 @@ class ChromecastPlay {
   }
 
   scanForChromecast() {
-    const browser = mdns.createBrowser(mdns.tcp('googlecast'));
+    const mdnsSequence = [
+      mdns.rst.DNSServiceResolve(),
+      'DNSServiceGetAddrInfo' in mdns.dns_sd ? mdns.rst.DNSServiceGetAddrInfo() : mdns.rst.getaddrinfo({ families: [0] }),
+      mdns.rst.makeAddressesUnique(),
+    ];
+
+    const browser = mdns.createBrowser(mdns.tcp('googlecast'), { resolverSequence: mdnsSequence });
 
     debug(`Scanning for Chromecast device named "${this.chromecastDeviceName}"`);
 
@@ -73,7 +81,7 @@ class ChromecastPlay {
       const media = {
         contentId: this.fileToPlay,
         contentType: this.mimeType,
-        streamType: 'BUFFERED',
+        streamType: this.streamType,
 
         metadata: {
           type: 0,

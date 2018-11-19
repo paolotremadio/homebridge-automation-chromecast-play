@@ -25,7 +25,9 @@ Example:
     "url": "https://freepd.com/music/Pond.mp3",
     "author": {
       "name": "Rafael Krux"
-    }
+    },
+    "mimeType": "audio/mp3",
+    "streamType": "BUFFERED"
   }
 ]
 ```
@@ -39,6 +41,8 @@ Format of each media object:
 | name | Yes | The name of the media | `Ukulele Song` |
 | url | Yes | The URL of the media to be streamed | `https://freepd.com/music/Ukulele%20Song.mp3` |
 | author.name | No (default: `unknown`) | The name of the author of the media | `Rafael Krux` |
+| mimeType | No (default: autodetect based on file extension) | The MIME type of the file. See [Chromecast supported types](https://developers.google.com/cast/docs/media) | `audio/mp3` |
+| streamType | No (default: `BUFFERED`) | The type of stream. For files, use `BUFFERED`, for live feeds use `LIVE` | `BUFFERED` |
 
 
 You can find an example file in this repo under `media.json`. This file contains some public domain audio (but you can stream video too). 

@@ -127,6 +127,8 @@ class AutomationChromecastPlay {
       mediaStatusUpdate,
       this.chromecastDeviceName,
       mediaConfig.url,
+      mediaConfig.mimeType || null,
+      mediaConfig.streamType || null,
     );
 
     this.currentMediaName = mediaName;
