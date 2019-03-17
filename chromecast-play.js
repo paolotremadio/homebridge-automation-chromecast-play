@@ -13,7 +13,7 @@ class ChromecastPlay {
       throw new Error('Mime type not supported');
     }
 
-    this.streamType = streamType.toUpperCase() || 'BUFFERED';
+    this.streamType = streamType ? streamType.toUpperCase() : 'BUFFERED';
 
     this.log = logger;
     this.chromecastClient = null;
@@ -28,26 +28,30 @@ class ChromecastPlay {
       mdns.rst.makeAddressesUnique(),
     ];
 
-    const browser = mdns.createBrowser(mdns.tcp('googlecast'), { resolverSequence: mdnsSequence });
+    try {
+      const browser = mdns.createBrowser(mdns.tcp('googlecast'), { resolverSequence: mdnsSequence });
 
-    debug(`Scanning for Chromecast device named "${this.chromecastDeviceName}"`);
+      debug(`Scanning for Chromecast device named "${this.chromecastDeviceName}"`);
 
-    browser.on('serviceUp', (device) => {
-      const txt = device.txtRecord;
-      const name = txt.fn;
+      browser.on('serviceUp', (device) => {
+        const txt = device.txtRecord;
+        const name = txt.fn;
 
-      if (name.toLowerCase() === this.chromecastDeviceName.toLowerCase()) {
-        const ipAddress = device.addresses[0];
-        const { port } = device;
+        if (name.toLowerCase() === this.chromecastDeviceName.toLowerCase()) {
+          const ipAddress = device.addresses[0];
+          const { port } = device;
 
-        this.log(`Chromecast found on ${ipAddress}:${port}. Connecting...`);
+          this.log(`Chromecast found on ${ipAddress}:${port}. Connecting...`);
 
-        browser.stop();
-        this.clientConnect(ipAddress, port);
-      }
-    });
+          browser.stop();
+          this.clientConnect(ipAddress, port);
+        }
+      });
 
-    browser.start();
+      browser.start();
+    } catch (e) {
+      this.log(`Error in connecting to Chromecast: ${e}`);
+    }
   }
 
   clientConnect(host, port) {
