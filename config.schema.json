@@ -1,0 +1,39 @@
+{
+    "pluginAlias": "AutomationChromecast",
+    "pluginType": "accessory",
+    "headerDisplay": "This accessory will play/cast audio and/or video to your Chromecast on demand. It can be used for automation. The list of media (audio/video) to be played must be stored on a file. The plugin will pick a random media from the file every time you turn on the switch. If you want to apply always the same, create a json file with only one media.",
+    "footerDisplay": "For help with format of each media object: [Media File](https://github.com/paolotremadio/homebridge-automation-chromecast-play#media-file).",
+    "schema": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "title": "Name",
+                "type": "string",
+                "required": true,
+                "default": "Living Room TV",
+                "description": "A unique name for the accessory. It will be used as the accessory name in HomeKit."
+            },
+            "accessory": {
+                "title": "Accessoy",
+                "type": "string",
+                "default": "AutomationChromecast",
+                "required": true,
+                "description": "This must be AutomationChromecast."
+            },
+            "chromecastDeviceName": {
+                "title": "Chromecast Device Name",
+                "type": "string",
+                "placeholder": "Living Room",
+                "required": true,
+                "description": "The name of your Chromecast device as shown in your Google Home App (case insensitive). This plugin will use Bonjour/mdns to detect the IP address of the Chromecast based on this name."
+            },
+            "mediaFile": {
+                "title": "Media File",
+                "type": "string",
+                "placeholder": "./media.json",
+                "required": true,
+                "description": "The path of the media file (relative to the Homebridge current working directory)."
+            }
+        }
+    }
+}
