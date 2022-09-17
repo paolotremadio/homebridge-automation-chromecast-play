@@ -1,6 +1,6 @@
 const fs = require('fs');
 const debug = require('debug')('homebridge-automation-chromecast-play');
-const pkginfo = require('./package');
+const pkginfo = require('./package.json');
 
 const CustomCharacteristics = require('./custom-characteristics');
 const ChromecastPlay = require('./chromecast-play');
@@ -35,20 +35,20 @@ class AutomationChromecastPlay {
 
     this.switchService
       .getCharacteristic(Characteristic.On)
-      .on('get', callback => callback(null, false))
+      .on('get', (callback) => { callback(null, false); })
       .on('set', this.setSwitch.bind(this));
 
     this.switchService
       .addCharacteristic(CustomCharacteristics.MediaName)
-      .on('get', callback => callback(null, this.currentMediaName));
+      .on('get', (callback) => { callback(null, this.currentMediaName); });
 
     this.switchService
       .addCharacteristic(CustomCharacteristics.MediaAuthor)
-      .on('get', callback => callback(null, this.currentMediaAuthor));
+      .on('get', (callback) => { callback(null, this.currentMediaAuthor); });
 
     this.switchService
       .addCharacteristic(CustomCharacteristics.MediaStatus)
-      .on('get', callback => callback(null, this.currentMediaStatus));
+      .on('get', (callback) => { callback(null, this.currentMediaStatus); });
 
     this.accessoryInformationService = new Service.AccessoryInformation()
       .setCharacteristic(Characteristic.Name, this.name)
