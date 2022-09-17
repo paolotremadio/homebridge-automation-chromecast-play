@@ -1,38 +1,39 @@
 {
   "name": "homebridge-automation-chromecast-play",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "Play/cast audio and/or video to your Chromecast",
   "license": "ISC",
   "keywords": [
     "homebridge-plugin"
   ],
   "author": {
-    "name": "Paolo Tremadio"
+    "name": "Marco Aeberli"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/paolotremadio/homebridge-automation-chromecast-play.git"
+    "url": "git://https://github.com/maeberli/homebridge-automation-chromecast-play"
   },
   "bugs": {
-    "url": "http://github.com/paolotremadio/homebridge-automation-chromecast-play/issues"
+    "url": "http://https://github.com/maeberli/homebridge-automation-chromecast-play/issues"
   },
   "engines": {
-    "node": ">=8.0.0",
-    "homebridge": ">=0.4.0"
+    "homebridge": ">=1.0.0"
   },
   "dependencies": {
     "castv2-client": "^1.2.0",
-    "debug": "^3.1.0",
-    "hap-nodejs": "^0.4.48",
-    "mdns": "^2.4.0",
-    "mime-types": "^2.1.19"
+    "debug": "^4.3.4",
+    "hap-nodejs": "^0.10.3",
+    "mdns": "^2.7.2",
+    "mime-types": "^2.1.35"
   },
   "devDependencies": {
-    "eslint": "^4.16.0",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0"
+    "eslint": "^8.22.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.8.0",
+    "homebridge": "^1.5.0"
   },
   "scripts": {
-    "lint": "./node_modules/eslint/bin/eslint.js . --ext .js"
+    "lint": "./node_modules/eslint/bin/eslint.js . --ext .js",
+    "watch": "npm link && nodemon"
   }
 }
